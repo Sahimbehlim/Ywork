@@ -4,7 +4,9 @@ export default function ChatBubble({ message, time, type }) {
   const isUser = type === "user";
 
   return (
-    <div className={`flex flex-col gap-1 items-${isUser ? "end" : "start"}`}>
+    <div
+      className={`flex flex-col gap-1 ${isUser ? "items-end" : "items-start"}`}
+    >
       <div
         className={`max-w-xs md:max-w-md px-5 py-3 rounded-t-2xl ${
           isUser
@@ -14,7 +16,7 @@ export default function ChatBubble({ message, time, type }) {
       >
         {message}
       </div>
-      <p className="ps-1 text-sm text-gray-500">{time}</p>
+      <p className="ps-1 text-sm text-gray-500">Sent~{time}</p>
     </div>
   );
 }
