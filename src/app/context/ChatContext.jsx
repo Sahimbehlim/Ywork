@@ -7,7 +7,8 @@ export const ChatProvider = ({ children }) => {
     {
       id: 1,
       name: "Emma Thompson",
-      lastMessage: "I've sent you the latest project",
+      lastMessage:
+        "I've sent you the latest project I've sent you the latest project",
       lastMessageTime: "12:45 PM",
       status: "online",
     },
@@ -36,6 +37,7 @@ export const ChatProvider = ({ children }) => {
 
   const [contacts, setContacts] = useState(initialContacts);
   const [activeContact, setActiveContact] = useState(contacts[0]);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
 
   // Get initial letters from name
   const getInitials = (name) => {
@@ -63,6 +65,8 @@ export const ChatProvider = ({ children }) => {
         setActiveContact,
         getInitials,
         getRandomColor,
+        sideBarOpen,
+        setSideBarOpen,
       }}
     >
       {children}

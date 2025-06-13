@@ -3,14 +3,22 @@
 import { useChat } from "@/app/context/ChatContext";
 
 export default function ContactCard({ contact }) {
-  const { activeContact, setActiveContact, getInitials, getRandomColor } =
-    useChat();
+  const {
+    activeContact,
+    setActiveContact,
+    setSideBarOpen,
+    getInitials,
+    getRandomColor,
+  } = useChat();
 
   const colors = getRandomColor(contact.name);
 
   return (
     <div
-      onClick={() => setActiveContact(contact)}
+      onClick={() => {
+        setActiveContact(contact);
+        setSideBarOpen(false);
+      }}
       className="py-3.5 px-5 flex items-center gap-3.5 relative hover:bg-gray-100 cursor-pointer transition-all duration-300"
     >
       <div
@@ -30,12 +38,15 @@ export default function ContactCard({ contact }) {
           />
         )}
       </div>
-      <div className="flex-1 flex-col">
+
+      <div className="flex-1 flex-col whitespace-nowrap overflow-hidden">
         <div className="flex items-center justify-between">
           <h2 className="font-semibold">{contact.name}</h2>
           <p className="text-sm text-gray-600">{contact.lastMessageTime}</p>
         </div>
-        <p className="text-sm text-gray-600">{contact.lastMessage}</p>
+        <p className="text-sm text-gray-600 text-ellipsis overflow-hidden">
+          {contact.lastMessage}
+        </p>
       </div>
 
       {activeContact?.id === contact?.id && (
