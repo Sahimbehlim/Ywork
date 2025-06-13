@@ -1,52 +1,34 @@
 "use client";
 
 import { useChat } from "@/app/context/ChatContext";
+import UserProfile from "./UserProfile";
+import { useCallback } from "react";
 
 export default function ContactCard({ contact }) {
-  const {
-    activeContact,
-    setActiveContact,
-    setSideBarOpen,
-    getInitials,
-    getRandomColor,
-  } = useChat();
+  const { activeContact, setActiveContact, setSideBarOpen } = useChat();
 
-  const colors = getRandomColor(contact.name);
+  const handleClick = () => {
+    setActiveContact(contact);
+    setSideBarOpen(false);
+  };
 
   return (
     <div
-      onClick={() => {
-        setActiveContact(contact);
-        setSideBarOpen(false);
-      }}
+      onClick={handleClick}
       className="py-3.5 px-5 flex items-center gap-3.5 relative hover:bg-gray-100 cursor-pointer transition-all duration-300"
     >
-      <div
-        style={{
-          backgroundColor: colors.bg,
-          color: colors.text,
-        }}
-        className="relative size-12 rounded-full flex justify-center items-center font-semibold"
-      >
-        {getInitials(contact.name)}
+      <UserProfile
+        className={`size-12 font-semibold`}
+        name={contact.name}
+        status={contact.status}
+      />
 
-        {contact.status && (
-          <span
-            className={`absolute bottom-1 right-0.5 w-[9px] h-[9px] rounded-full ${
-              contact.status == "online" ? "bg-green-500 " : "bg-gray-500"
-            }`}
-          />
-        )}
-      </div>
-
-      <div className="flex-1 flex-col whitespace-nowrap overflow-hidden">
+      <div className="flex-1 flex-col truncate">
         <div className="flex items-center justify-between">
           <h2 className="font-semibold">{contact.name}</h2>
           <p className="text-sm text-gray-600">{contact.lastMessageTime}</p>
         </div>
-        <p className="text-sm text-gray-600 text-ellipsis overflow-hidden">
-          {contact.lastMessage}
-        </p>
+        <p className="text-sm text-gray-600 truncate">{contact.lastMessage}</p>
       </div>
 
       {activeContact?.id === contact?.id && (
