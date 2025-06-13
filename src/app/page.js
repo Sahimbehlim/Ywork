@@ -2,14 +2,17 @@
 
 import Chats from "./components/Chats";
 import Navbar from "./components/Navbar";
+import { ChatProvider } from "./context/ChatContext";
 
 export default function Home() {
   return (
-    <div className="bg-white h-screen w-full">
-      <Navbar />
-      <div className="flex pt-16 h-full">
-        <Chats />
+    <ChatProvider>
+      <div className="bg-white flex flex-col h-screen w-full">
+        <Navbar />
+        <div className="flex pt-16 h-full overflow-hidden">
+          <Chats />
+        </div>
       </div>
-    </div>
+    </ChatProvider>
   );
 }
