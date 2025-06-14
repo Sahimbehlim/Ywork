@@ -10,7 +10,7 @@ export default function Home() {
     <ChatProvider>
       <div className="bg-white flex flex-col h-screen w-full">
         <Navbar />
-        <div className="flex pt-16 min-h-full">
+        <div className="flex pt-16 h-[calc(100vh-4rem)]">
           <Chats />
           <ChatWindow />
         </div>
