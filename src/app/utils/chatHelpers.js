@@ -11,7 +11,7 @@ export const getRandomColor = (name) => {
   const hash = [...name].reduce((a, c) => a + c.charCodeAt(0), 0);
   const hue = hash % 360;
   return {
-    bg: `hsl(${hue}, 70%, 80%)`,
-    text: `hsl(${hue}, 70%, 30%)`,
+    bg: name ? `hsl(${hue}, 70%, 80%)` : "#4b46e1",
+    text: name ? `hsl(${hue}, 70%, 30%)` : "#FFF",
   };
 };

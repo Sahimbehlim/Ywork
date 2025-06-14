@@ -15,7 +15,7 @@ export default function UserProfile({
         backgroundColor: colors.bg,
         color: colors.text,
       }}
-      className={`${className} relative bg-primary text-white size-9 rounded-full flex justify-center items-center`}
+      className={`relative size-9 rounded-full flex justify-center items-center ${className}`}
     >
       {name ? getInitials(name) : "CL"}
 

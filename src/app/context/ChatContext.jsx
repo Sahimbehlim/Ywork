@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { getReply } from "../utils/gemini";
 
 const ChatContext = createContext();
 
@@ -33,11 +34,91 @@ export const ChatProvider = ({ children }) => {
       lastMessageTime: "Tuesday",
       status: "",
     },
+    {
+      id: 5,
+      name: "Amelia Wilson",
+      lastMessage: "Thanks for your help with the client",
+      lastMessageTime: "Monday",
+      status: "",
+    },
+    {
+      id: 6,
+      name: "Daniel Martinez",
+      lastMessage: "Let's schedule a call to discuss the project",
+      lastMessageTime: "May 25",
+      status: "",
+    },
   ];
 
   const [contacts, setContacts] = useState(initialContacts);
   const [activeContact, setActiveContact] = useState(contacts[0]);
   const [sideBarOpen, setSideBarOpen] = useState(false);
+  const [newMessage, setNewMessage] = useState("");
+  const [messages, setMessages] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const sendMessage = async () => {
+    if (newMessage.trim() === "") {
+      alert("Message can't be empty.");
+      return;
+    }
+
+    const currentTime = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const userMessage = {
+      id: Date.now(),
+      text: newMessage,
+      sender: "user",
+      currentTime,
+    };
+
+    const typingMessage = {
+      id: Date.now() + 1,
+      text: "",
+      sender: "bot",
+      typing: true,
+    };
+
+    const contactId = activeContact.id;
+
+    setMessages((prev) => ({
+      ...prev,
+      [contactId]: [...(prev[contactId] || []), userMessage, typingMessage],
+    }));
+
+    setNewMessage("");
+
+    // Gemini reply
+    setLoading(true);
+    const botResponse = await getReply(newMessage);
+
+    const botMessage = {
+      id: Date.now() + 2,
+      text: botResponse,
+      sender: "bot",
+      currentTime,
+    };
+
+    // Replace typing message
+    setMessages((prev) => ({
+      ...prev,
+      [contactId]: (prev[contactId] || []).map((msg) =>
+        msg.typing ? botMessage : msg
+      ),
+    }));
+
+    const updatedContact = contacts.map((contact) =>
+      contact.id === contactId
+        ? { ...contact, lastMessage: botResponse, lastMessageTime: currentTime }
+        : contact
+    );
+
+    setContacts(updatedContact);
+    setLoading(false);
+  };
 
   return (
     <ChatContext.Provider
@@ -47,6 +128,12 @@ export const ChatProvider = ({ children }) => {
         setActiveContact,
         sideBarOpen,
         setSideBarOpen,
+        newMessage,
+        setNewMessage,
+        loading,
+        sendMessage,
+        messages,
+        activeContactMessage: messages[activeContact.id] || [],
       }}
     >
       {children}

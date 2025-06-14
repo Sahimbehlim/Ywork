@@ -5,9 +5,18 @@ import MessageInput from "./MessageInput";
 import { IoMdContacts } from "react-icons/io";
 import ChatBubble from "./ChatBubble";
 import UserProfile from "./UserProfile";
+import { useRef, useEffect } from "react";
 
 export default function ChatWindow() {
-  const { activeContact, setSideBarOpen, sideBarOpen } = useChat();
+  const chatInterfaceRef = useRef();
+  const { activeContact, setSideBarOpen, sideBarOpen, activeContactMessage } =
+    useChat();
+
+  useEffect(() => {
+    chatInterfaceRef.current.scrollTo({
+      top: chatInterfaceRef.current.scrollHeight,
+    });
+  }, [activeContactMessage]);
 
   return (
     <div className="w-full flex flex-col min-h-full flex-1">
@@ -43,19 +52,19 @@ export default function ChatWindow() {
       </div>
 
       {/* Chat Interface */}
-      <div className="px-6 py-3 overflow-y-auto space-y-4">
-        <ChatBubble
-          message="Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Voluptatibus quibusdam incidunt sint vitae dolore? Voluptatem."
-          time="12:00 PM"
-          type="modal"
-        />
-        <ChatBubble
-          message="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat,
-            dolore?"
-          time="12:05 PM"
-          type="user"
-        />
+      <div
+        ref={chatInterfaceRef}
+        className="px-6 py-3 overflow-y-auto space-y-4"
+      >
+        {activeContactMessage.length === 0 ? (
+          <div className="text-gray-500 text-center mt-4">
+            No conversations yet
+          </div>
+        ) : (
+          activeContactMessage.map((message) => (
+            <ChatBubble key={message.id} message={message} />
+          ))
+        )}
       </div>
 
       {/* Message Input  */}

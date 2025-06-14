@@ -1,7 +1,8 @@
 "use client";
 
-export default function ChatBubble({ message, time, type }) {
-  const isUser = type === "user";
+export default function ChatBubble({ message }) {
+  const isUser = message?.sender === "user";
+  const isTyping = message?.typing;
 
   return (
     <div
@@ -14,9 +15,16 @@ export default function ChatBubble({ message, time, type }) {
             : "bg-[#f0f0f5] rounded-r-2xl"
         }`}
       >
-        {message}
+        {!isUser && isTyping ? (
+          <span className="italic text-gray-600">Typing...</span>
+        ) : (
+          message?.text
+        )}
       </div>
-      <p className="ps-1 text-sm text-gray-500">Sent~{time}</p>
+      <p className="ps-1 text-sm text-gray-500">
+        {isUser ? "Sent ~ " : isTyping ? "" : "Received ~ "}
+        {message?.currentTime || ""}
+      </p>
     </div>
   );
 }
