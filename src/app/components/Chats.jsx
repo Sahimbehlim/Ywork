@@ -9,7 +9,7 @@ export default function Chats() {
 
   return (
     <div
-      className={`fixed md:relative top-16 md:top-0 left-0 z-20 bg-white md:border-r md:border-gray-200 w-full md:w-80 lg:w-96 transition-transform duration-300 ease-in-out
+      className={`fixed md:relative top-16 md:top-0 left-0 md:left-0 z-20 md:z-0 bg-white md:border-r md:border-gray-200 w-full md:w-80 lg:w-96 transition-transform duration-300 ease-in-out
           ${
             sideBarOpen ? "translate-x-0" : "-translate-x-full"
           } md:translate-x-0 h-[calc(100vh-4rem)] overflow-y-auto`}
