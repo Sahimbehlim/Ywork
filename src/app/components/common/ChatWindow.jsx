@@ -13,9 +13,10 @@ export default function ChatWindow() {
     useChat();
 
   useEffect(() => {
-    chatInterfaceRef.current.scrollTo({
-      top: chatInterfaceRef.current.scrollHeight,
-    });
+    if (chatInterfaceRef.current) {
+      chatInterfaceRef.current.scrollTop =
+        chatInterfaceRef.current.scrollHeight;
+    }
   }, [activeContactMessage]);
 
   return (

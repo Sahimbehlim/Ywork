@@ -2,7 +2,6 @@
 
 import { useChat } from "@/app/context/ChatContext";
 import UserProfile from "./UserProfile";
-import { useCallback } from "react";
 
 export default function ContactCard({ contact }) {
   const { activeContact, setActiveContact, setSideBarOpen } = useChat();

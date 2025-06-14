@@ -1,12 +1,7 @@
 "use client";
 import { getInitials, getRandomColor } from "@/app/utils/chatHelpers";
 
-export default function UserProfile({
-  name = "",
-  styles,
-  className = "",
-  status,
-}) {
+export default function UserProfile({ name = "", className = "", status }) {
   const colors = getRandomColor(name);
 
   return (

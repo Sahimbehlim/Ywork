@@ -58,10 +58,8 @@ export const ChatProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
-    if (newMessage.trim() === "") {
-      alert("Message can't be empty.");
-      return;
-    }
+    const id = Date.now();
+    const contactId = activeContact.id;
 
     const currentTime = new Date().toLocaleTimeString([], {
       hour: "2-digit",
@@ -69,20 +67,18 @@ export const ChatProvider = ({ children }) => {
     });
 
     const userMessage = {
-      id: Date.now(),
+      id: id,
       text: newMessage,
       sender: "user",
       currentTime,
     };
 
     const typingMessage = {
-      id: Date.now() + 1,
+      id: id + 1,
       text: "",
       sender: "bot",
       typing: true,
     };
-
-    const contactId = activeContact.id;
 
     setMessages((prev) => ({
       ...prev,
@@ -96,7 +92,7 @@ export const ChatProvider = ({ children }) => {
     const botResponse = await getReply(newMessage);
 
     const botMessage = {
-      id: Date.now() + 2,
+      id: id + 2,
       text: botResponse,
       sender: "bot",
       currentTime,

@@ -7,6 +7,7 @@ export default function MessageInput() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!newMessage.trim()) return alert("Message can't be empty.");
     sendMessage();
   };
 

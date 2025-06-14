@@ -16,7 +16,7 @@ export default function ChatBubble({ message }) {
         }`}
       >
         {!isUser && isTyping ? (
-          <span className="italic text-gray-600">Typing...</span>
+          <span className="animate-pulse text-gray-600">Typing...</span>
         ) : (
           message?.text
         )}
