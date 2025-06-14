@@ -48,6 +48,48 @@ export const ChatProvider = ({ children }) => {
       lastMessageTime: "May 25",
       status: "",
     },
+    {
+      id: 7,
+      name: "Daniel Martinez",
+      lastMessage: "Let's schedule a call to discuss the project",
+      lastMessageTime: "May 25",
+      status: "",
+    },
+    {
+      id: 8,
+      name: "Daniel Martinez",
+      lastMessage: "Let's schedule a call to discuss the project",
+      lastMessageTime: "May 25",
+      status: "",
+    },
+    {
+      id: 9,
+      name: "Daniel Martinez",
+      lastMessage: "Let's schedule a call to discuss the project",
+      lastMessageTime: "May 25",
+      status: "",
+    },
+    {
+      id: 10,
+      name: "Daniel Martinez",
+      lastMessage: "Let's schedule a call to discuss the project",
+      lastMessageTime: "May 25",
+      status: "",
+    },
+    {
+      id: 11,
+      name: "Daniel Martinez",
+      lastMessage: "Let's schedule a call to discuss the project",
+      lastMessageTime: "May 25",
+      status: "",
+    },
+    {
+      id: 12,
+      name: "Daniel Martinez",
+      lastMessage: "Let's schedule a call to discuss the project",
+      lastMessageTime: "May 25",
+      status: "",
+    },
   ];
 
   const [contacts, setContacts] = useState(initialContacts);
