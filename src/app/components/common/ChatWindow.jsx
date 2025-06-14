@@ -20,7 +20,7 @@ export default function ChatWindow() {
   }, [activeContactMessage]);
 
   return (
-    <div className="w-full flex flex-col h-[calc(100vh-4rem)] md:flex-1 bg-sky-100">
+    <div className="w-full flex flex-col h-[calc(100vh-4rem)] md:flex-1 bg-rose-100 overflow-auto">
       {/* Top Bar */}
       <div className="px-6 py-3 border-b border-gray-200 flex items-center justify-between">
         <div className="flex items-center gap-2.5">

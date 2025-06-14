@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <ChatProvider>
       <Navbar />
-      <div className="flex pt-16 h-[calc(100vh-4rem)]">
+      <div className="flex pt-16">
         <Chats />
         <ChatWindow />
       </div>
